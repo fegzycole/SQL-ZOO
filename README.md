@@ -1,0 +1,2 @@
+# SQL-ZOO
+A Repository for the DATABASE SECTION OF THE ODIN PROJECT
