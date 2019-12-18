@@ -54,3 +54,29 @@ SELECT name, continent FROM world x
 WHERE population > ALL
 (SELECT (3 * population) FROM world y
 WHERE y.continent = x.continent AND y.name != x.name);
+
+SELECT game.stadium, COUNT(goal.player) 
+FROM game 
+JOIN goal ON game.id = goal.matchid 
+GROUP BY stadium;
+
+SELECT goal.matchid, game.mdate, COUNT(goal.teamid)
+FROM goal 
+JOIN game ON goal.matchid = game.id 
+WHERE (game.team1 = 'POL' OR game.team2 = 'POL')
+GROUP BY goal.matchid, game.mdate;
+
+SELECT matchid, mdate, COUNT(teamid) 
+FROM goal 
+JOIN game 
+ON matchid = id 
+WHERE teamid = 'GER' 
+GROUP BY matchid, mdate;
+
+SELECT mdate,
+team1,
+SUM(CASE WHEN teamid = team1 THEN 1 ELSE 0 END) AS score1,
+team2,
+SUM(CASE WHEN teamid = team2 THEN 1 ELSE 0 END) AS score2
+FROM game LEFT JOIN goal ON matchid = id
+GROUP BY mdate, matchid, team1, team2;

@@ -31,3 +31,22 @@ SELECT continent
 FROM world 
 GROUP BY continent 
 HAVING SUM(population) > 100000000;
+
+SELECT goal.player 
+FROM goal 
+JOIN game 
+ON goal.matchid = game.id 
+WHERE game.stadium = 'National Stadium, Warsaw';
+
+SELECT DISTINCT goal.player
+FROM goal 
+JOIN game 
+ON goal.matchid = game.id 
+WHERE (team1 = 'GER' OR team2 = 'GER') 
+AND goal.teamid <> 'GER';
+
+SELECT eteam.teamname, COUNT(goal.teamid)
+FROM eteam 
+JOIN goal 
+ON eteam.id = goal.teamid
+GROUP BY eteam.teamname;
